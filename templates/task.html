@@ -1,0 +1,61 @@
+<html>
+<head>
+  <link type="text/css" rel="/home/administrator/Desktop/index.ico"
+        href="/static/style.css"/>
+  <title>deadpool</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <img id="pic" src="/static/joker.jpg" alt="deadpool" title="deadpool" height="300" width="100%">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <p id="name" class="text text-center"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="email" class="text text-center"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text text-center">Basic Information</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ol id="info-list" class="list-group">
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script>
+
+  var readyFunction = () => {
+    var foo = $.ajax({url: '/get_info'});
+
+    foo.done((responseData) => {
+      $('#name').text('Name: ' + responseData.name);
+      $('#email').text(responseData.email);
+      for (var info in responseData.info) {
+        $('#info-list').append('<li class="list-group-item">' + responseData.info[info] + '</li>')
+      }
+    });
+  };
+
+  $(document).ready(readyFunction);
+</script>
+</body>
+</html>

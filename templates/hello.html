@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello FAST</title>
+</head>
+<body>
+<h1 id="hello">Hello World!</h1>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+  /* function passed to $(document).ready function, will be called when "document" is ready */
+  $(document).ready(function () {
+    /*
+     - $.ajax is a jQuery function to invoke ajax calls
+     - Can be done without jQuery but has different syntax
+     - Needs a JSON object with a mandatory property of "url"
+     */
+    $.ajax({
+      url: "/get_data",
+    })
+    /*
+     - function passed to "done", will be called when ajax call has recieved its respose
+     - This function should have one argument here we have "data" which would contain response
+     */
+    .done(function(data) {
+      data = {
+        name: 'Irfan'
+      };
+      // Calling text function on object representing h1 with hello id, and passing it data recieved from server
+      $('#hello').text('Hello ' + data.name)
+    });
+  })
+</script>
+</body>
+</html>
